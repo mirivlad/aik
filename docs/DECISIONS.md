@@ -36,13 +36,11 @@ Hand-editing `.env` is not an acceptable normal administration workflow.
 
 ## D-0004 — Reuse FreeLLMAPI for the first model-gateway implementation
 
-**Status:** accepted for investigation/bootstrap
+**Status:** accepted
 
-Rather than reimplementing aggregation of free cloud LLM providers, quotas, routing and fallback from scratch, AIK will first reuse/fork suitable MIT-licensed FreeLLMAPI code.
+AIK will integrate the complete FreeLLMAPI implementation as a separately runnable model-gateway service whose source is vendored in the canonical `mirivlad/aik` repository. Assistant Core will depend on its stable API rather than on gateway internals.
 
-The implementation must preserve applicable upstream copyright/license notices.
-
-This decision may be revisited if technical inspection shows that maintaining the fork would cost more than implementing the required subset independently.
+The upstream source will be imported deliberately from pinned releases and applicable MIT copyright/license notices will be preserved. AIK-specific network-policy changes, including fail-closed proxy semantics, are defined in [ADR-0001](adr/0001-model-gateway-integration.md).
 
 ## D-0005 — One global outbound proxy initially
 
